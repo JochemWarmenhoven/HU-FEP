@@ -1,34 +1,34 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import {Router} from '@angular/router';
 
 
 @Injectable()
 export class AuthService {
-  private userEmail: String = null;
-  private userLoggedIn: boolean = false;
-  constructor(private firebaseAuth: AngularFireAuth) { }
+  constructor(private firebaseAuth: AngularFireAuth, private router: Router) { }
 
   googleLogin() {
     return this.firebaseAuth.auth.signInWithPopup(
       new firebase.auth.GoogleAuthProvider()
     ).then((result) => {
       const user = result.user;
-      this.userEmail = user.email;
-      this.userLoggedIn = true;
-      console.log('User logged in with email: ' + this.userEmail);
+      console.log('User logged in with email: ' + user.email);
     });
   }
 
   logout() {
+    console.log('Executing logout. User info:' + this.firebaseAuth.auth.currentUser);
     return this.firebaseAuth.auth.signOut().then(() => {
-      this.userLoggedIn = false;
-      this.userEmail = null;
-      console.log('User has been logged out. Current user email is:' + this.userEmail);
+      // user successfully signed out
+      // navigate to homepage
+      this.router.navigate(['login']);
+      console.log('LOGGED OUT???');
+      console.log(this.firebaseAuth.auth.currentUser);
     });
   }
 
-  isLoggedIn(): boolean {
-    return this.userLoggedIn;
+  isAuthenticated() {
+    return this.firebaseAuth.auth.currentUser !== null;
   }
 }
