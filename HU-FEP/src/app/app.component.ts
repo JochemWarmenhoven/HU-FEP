@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import { AuthService } from './shared/auth.service';
+import * as firebase from 'firebase/app';
+
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
 }

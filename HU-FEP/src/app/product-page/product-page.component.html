@@ -1,0 +1,9 @@
+<ul>
+  <li *ngFor="let product of (products$ | async)">
+    <span>{{product.name}}</span>
+    <button (click)="orderProduct(product)">Order Product</button>
+  </li>
+</ul>
+
+
+<input #productName type="text" (keyup.enter)="addProduct(productName.value)">

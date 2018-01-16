@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let product of (products$ | async)">
+    <span>{{product.name}}</span>
+    <button (click)="cancelOrder(product)">Cancel Reservation</button>
+  </li>
+</ul>
