@@ -7,18 +7,32 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AuthService } from './shared/auth.service';
-import { RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import {LoginguardService} from './shared/loginguard.service';
+import { LoginguardService } from './shared/loginguard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyReservationsComponent } from './my-reservations/my-reservations.component';
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent, canActivate: [LoginguardService]},
-  { path: 'dashboard', component: DashboardComponent, canActivate: [LoginguardService]},
-  { path: 'login', component: LoginPageComponent},
-  { path: 'products', component: ProductPageComponent, canActivate: [LoginguardService]}
+  { path: '', component: AppComponent, canActivate: [LoginguardService] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [LoginguardService]
+  },
+  { path: 'login', component: LoginPageComponent },
+  {
+    path: 'products',
+    component: ProductPageComponent,
+    canActivate: [LoginguardService]
+  },
+  {
+    path: 'my-reservations',
+    component: MyReservationsComponent,
+    canActivate: [LoginguardService]
+  }
 ];
 
 @NgModule({
@@ -28,6 +42,7 @@ const appRoutes: Routes = [
     MenuComponent,
     LoginPageComponent,
     DashboardComponent,
+    MyReservationsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,4 +54,4 @@ const appRoutes: Routes = [
   providers: [AuthService, LoginguardService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

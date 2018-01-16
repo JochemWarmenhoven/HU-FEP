@@ -1,26 +1,9 @@
-<!-- <ul>
-  <li *ngFor="let product of (products)">
-    <div *ngVar="let value = false"></div>
-    {{product.name}}
-    <div *ngIf="value; else elseBlock">
-      <button (click)="addToArray(product); value = !value">Add to Basket</button>
-    </div>
-    <ng-template #elseBlock>
-      <button (click)="removeFromArray(product); value = !value">Remove from Basket</button>
-    </ng-template>
-
-  </li>
-</ul>
-<!-- Click on button = add product to an array -->
-<!-- Click on 'reserve', then use saved array -->
-<!-- <input #productName type="text" (keyup.enter)="addProduct(productName.value)"> -->
-
 <ul>
-  <li *ngFor="let product of (products)">
-    <input (change)="product.isChecked = !product.isChecked" type="checkbox">
+  <li *ngFor="let product of (products$ | async)">
     <span>{{product.name}}</span>
-
+    <button (click)="orderProduct(product)">Order Product</button>
   </li>
 </ul>
 
-<button (click)="confirmOrder()">Order Products</button>
+
+<input #productName type="text" (keyup.enter)="addProduct(productName.value)">
