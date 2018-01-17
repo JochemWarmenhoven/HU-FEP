@@ -1,0 +1,12 @@
+<ul>
+  <li *ngFor="let product of (products$ | async)">
+    <span>{{product.name}} || {{product.reservedTo}}</span>
+
+    <div *ngIf="product.loanedDate === ''">
+      <button (click)="loanProduct(product)">Loan Product</button>
+    </div>
+    <div *ngIf="product.loanedDate !== ''">
+      <button (click)="cancelLoanProduct(product)">Cancel</button>
+    </div>
+  </li>
+</ul>

@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+
 import {
   AngularFireDatabase,
   FirebaseListObservable
 } from 'angularfire2/database';
 
 import { AuthService } from '../shared/auth.service';
-
 @Component({
-  selector: 'app-product-page',
-  templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.css']
+  selector: 'app-product-intake-page',
+  templateUrl: './product-intake-page.component.html',
+  styleUrls: ['./product-intake-page.component.css']
 })
-export class ProductPageComponent implements OnInit {
+export class ProductIntakePageComponent implements OnInit {
   products$: FirebaseListObservable<any[]>;
 
   constructor(private af: AngularFireDatabase, private auth: AuthService) {}
 
   ngOnInit() {
     this.products$ = this.af.list('/products', {
-      query: { orderByChild: 'reservedTo', equalTo: '' }
+      query: { orderByChild: 'loaned', equalTo: true }
     });
   }
 
-  addProduct(value: string): void {
-    this.products$.push({
-      name: value,
+  takeinOrder(product: any) {
+    this.af.object('/products/' + product.$key).update({
       reserved: false,
       reservedDate: '',
       reservedTo: '',
@@ -32,15 +31,6 @@ export class ProductPageComponent implements OnInit {
       ready: false,
       loaned: false,
       loanedDate: ''
-    });
-  }
-
-  orderProduct(product: any) {
-    console.log(product);
-    this.af.object('/products/' + product.$key).update({
-      reserved: true,
-      reservedTo: this.auth.getEmail().email,
-      reservedDate: Date.now()
     });
   }
 }

@@ -1,0 +1,13 @@
+<ul>
+  <li *ngFor="let product of (products$ | async)">
+    <span>{{product.name}} || {{product.reservedTo}} </span>
+    <div *ngIf="!product.ready">
+      <button (click)="processOrder(product)">Processed</button>
+    </div>
+    <div *ngIf="product.ready">
+      <button (click)="cancelProcess(product)">Cancel</button>
+    </div>
+  </li>
+</ul>
+
+<a routerLink="/loan-products" routerLinkActive="active">Loan Products</a>
