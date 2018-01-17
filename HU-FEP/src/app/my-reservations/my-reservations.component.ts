@@ -24,8 +24,13 @@ export class MyReservationsComponent implements OnInit {
 
   cancelOrder(product: any) {
     this.af.object('/products/' + product.$key).update({
+      reserved: false,
+      reservedDate: '',
       reservedTo: '',
-      reservedDate: ''
+      isChecked: false,
+      ready: false,
+      loaned: false,
+      loanedDate: ''
     });
   }
 }

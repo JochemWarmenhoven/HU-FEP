@@ -1,13 +1,34 @@
-<ul>
-  <li *ngFor="let product of (products$ | async)">
-    <span>{{product.name}} || {{product.reservedTo}} </span>
-    <div *ngIf="!product.ready">
-      <button (click)="processOrder(product)">Processed</button>
-    </div>
-    <div *ngIf="product.ready">
-      <button (click)="cancelProcess(product)">Cancel</button>
-    </div>
-  </li>
-</ul>
+<div class="container">
 
-<a routerLink="/loan-products" routerLinkActive="active">Loan Products</a>
+  <h2>Procesing</h2>
+  <p> Here you will be able to set the order status to 'ready', when the product is ready for pick-up.</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Order Status</th>
+        <th scope="col">Reserved To</th>
+        <th scope="col">Cancel Reservation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of (products$ | async)">
+        <td>{{product.name}}</td>
+        <td>{{product.ready ? 'Ready for Pickup' : 'Not Ready Yet'}}</td>
+        <td>{{product.reservedTo}}</td>
+        <td>
+          <div *ngIf="!product.ready">
+            <button class="btn btn-primary" (click)="processOrder(product)">Ready for Pickup</button>
+          </div>
+          <div *ngIf="product.ready">
+            <button class="btn btn-danger" (click)="cancelProcess(product)">Cancel</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <a class="btn btn-primary" routerLink="/loan-products" routerLinkActive="active">Loan Products</a>
+  </div>
+</div>

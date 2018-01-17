@@ -1,6 +1,26 @@
-<ul>
-  <li *ngFor="let product of (products$ | async)">
-    <span>{{product.name}} - {{product.ready}}</span>
-    <button (click)="cancelOrder(product)">Cancel Reservation</button>
-  </li>
-</ul>
+<div class="container">
+
+  <h2>My Reservations</h2>
+  <p>Here you will find products you have reserved. You can cancel them at any time. When your product is ready for pick-up,
+    the status of the order will change.
+  </p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Order Status</th>
+        <th scope="col">Cancel Reservation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of (products$ | async)">
+        <td>{{product.name}}</td>
+        <td>{{product.ready ? 'Ready for Pickup' : 'Not Ready Yet'}}</td>
+        <td>
+          <button class="btn btn-danger" (click)="cancelOrder(product)">Cancel Reservation</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
