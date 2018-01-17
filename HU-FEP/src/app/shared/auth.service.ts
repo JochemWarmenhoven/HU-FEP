@@ -22,8 +22,6 @@ export class AuthService {
       'Executing logout. User info:' + this.firebaseAuth.auth.currentUser
     );
     return this.firebaseAuth.auth.signOut().then(() => {
-      // user successfully signed out
-      // navigate to homepage
       this.router.navigate(['login']);
       window.location.reload();
       console.log(this.firebaseAuth.auth.currentUser);

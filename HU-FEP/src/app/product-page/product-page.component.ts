@@ -5,6 +5,7 @@ import {
 } from 'angularfire2/database';
 
 import { AuthService } from '../shared/auth.service';
+import { ToastrService } from 'toastr-ng2';
 
 @Component({
   selector: 'app-product-page',
@@ -14,7 +15,11 @@ import { AuthService } from '../shared/auth.service';
 export class ProductPageComponent implements OnInit {
   products$: FirebaseListObservable<any[]>;
 
-  constructor(private af: AngularFireDatabase, private auth: AuthService) {}
+  constructor(
+    private af: AngularFireDatabase,
+    private auth: AuthService,
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit() {
     this.products$ = this.af.list('/products', {
@@ -42,5 +47,9 @@ export class ProductPageComponent implements OnInit {
       reservedTo: this.auth.getEmail().email,
       reservedDate: Date.now()
     });
+    this.toastrService.success(
+      "Product has been ordered. Find it under 'my reservations'!",
+      'Success!'
+    );
   }
 }

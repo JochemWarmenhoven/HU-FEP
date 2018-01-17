@@ -18,6 +18,8 @@ import { ProcessingPageComponent } from './processing-page/processing-page.compo
 import { LoanProductPageComponent } from './loan-product-page/loan-product-page.component';
 import { ProductIntakePageComponent } from './product-intake-page/product-intake-page.component';
 import { RoleguardService } from './shared/roleguard.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'toastr-ng2';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent, canActivate: [LoginguardService] },
@@ -71,7 +73,9 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [AuthService, LoginguardService, RoleguardService],
   bootstrap: [AppComponent]
