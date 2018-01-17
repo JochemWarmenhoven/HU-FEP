@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
   constructor(private firebaseAuth: AngularFireAuth, private router: Router) {}
+  adminUUIDs = ['ftHAa5dt9bSRshjIl6oN2Mp50Kq2'];
 
   googleLogin() {
     return this.firebaseAuth.auth
@@ -24,13 +25,25 @@ export class AuthService {
       // user successfully signed out
       // navigate to homepage
       this.router.navigate(['login']);
-      console.log('LOGGED OUT???');
+      window.location.reload();
       console.log(this.firebaseAuth.auth.currentUser);
     });
   }
 
   isAuthenticated() {
     return this.firebaseAuth.auth.currentUser !== null;
+  }
+
+  isAdmin() {
+    let success = false;
+    if (this.isAuthenticated()) {
+      this.adminUUIDs.map(uuid => {
+        if (uuid == this.getEmail().uid) {
+          success = true;
+        }
+      });
+    }
+    return success;
   }
 
   getEmail() {

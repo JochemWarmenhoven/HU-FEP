@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../shared/auth.service';
-import {Router} from '@angular/router';
+import { AuthService } from '../shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -10,12 +10,12 @@ import {Router} from '@angular/router';
 export class LoginPageComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   loginWithGoogle() {
     this.auth.googleLogin().then(() => {
       this.router.navigate(['dashboard']);
+      window.location.reload();
     });
   }
 }

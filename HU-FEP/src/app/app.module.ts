@@ -17,6 +17,7 @@ import { MyReservationsComponent } from './my-reservations/my-reservations.compo
 import { ProcessingPageComponent } from './processing-page/processing-page.component';
 import { LoanProductPageComponent } from './loan-product-page/loan-product-page.component';
 import { ProductIntakePageComponent } from './product-intake-page/product-intake-page.component';
+import { RoleguardService } from './shared/roleguard.service';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent, canActivate: [LoginguardService] },
@@ -39,17 +40,17 @@ const appRoutes: Routes = [
   {
     path: 'processing',
     component: ProcessingPageComponent,
-    canActivate: [LoginguardService]
+    canActivate: [RoleguardService]
   },
   {
     path: 'loan-products',
     component: LoanProductPageComponent,
-    canActivate: [LoginguardService]
+    canActivate: [RoleguardService]
   },
   {
     path: 'intake',
     component: ProductIntakePageComponent,
-    canActivate: [LoginguardService]
+    canActivate: [RoleguardService]
   }
 ];
 
@@ -72,7 +73,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthService, LoginguardService],
+  providers: [AuthService, LoginguardService, RoleguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
