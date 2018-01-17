@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let product of (products$ | async)">
+    <span>{{product.name}} || {{product.reservedTo}} </span>
+    <button (click)="takeinOrder(product)">Take In</button>
+  </li>
+</ul>

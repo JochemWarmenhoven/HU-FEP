@@ -14,6 +14,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginguardService } from './shared/loginguard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyReservationsComponent } from './my-reservations/my-reservations.component';
+import { ProcessingPageComponent } from './processing-page/processing-page.component';
+import { LoanProductPageComponent } from './loan-product-page/loan-product-page.component';
+import { ProductIntakePageComponent } from './product-intake-page/product-intake-page.component';
 
 const appRoutes: Routes = [
   { path: '', component: AppComponent, canActivate: [LoginguardService] },
@@ -32,6 +35,21 @@ const appRoutes: Routes = [
     path: 'my-reservations',
     component: MyReservationsComponent,
     canActivate: [LoginguardService]
+  },
+  {
+    path: 'processing',
+    component: ProcessingPageComponent,
+    canActivate: [LoginguardService]
+  },
+  {
+    path: 'loan-products',
+    component: LoanProductPageComponent,
+    canActivate: [LoginguardService]
+  },
+  {
+    path: 'intake',
+    component: ProductIntakePageComponent,
+    canActivate: [LoginguardService]
   }
 ];
 
@@ -42,7 +60,10 @@ const appRoutes: Routes = [
     MenuComponent,
     LoginPageComponent,
     DashboardComponent,
-    MyReservationsComponent
+    MyReservationsComponent,
+    ProcessingPageComponent,
+    LoanProductPageComponent,
+    ProductIntakePageComponent
   ],
   imports: [
     BrowserModule,
