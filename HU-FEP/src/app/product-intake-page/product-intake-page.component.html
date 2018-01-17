@@ -1,6 +1,28 @@
-<ul>
-  <li *ngFor="let product of (products$ | async)">
-    <span>{{product.name}} || {{product.reservedTo}} </span>
-    <button (click)="takeinOrder(product)">Take In</button>
-  </li>
-</ul>
+<div class="container">
+
+  <h2>Product Intake</h2>
+  <p> Here you will take in products that the student returns</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Order Status</th>
+        <th scope="col">Loaned Out To</th>
+        <th scope="col">Loaned Out Date</th>
+        <th scope="col">Take Product In</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of (products$ | async)">
+        <td>{{product.name}}</td>
+        <td>{{product.loaned ? 'Loaned Out' : 'Not Loaned Out'}}</td>
+        <td>{{product.reservedTo}}</td>
+        <td>{{product.loanedDate}}</td>
+        <td>
+          <button class="btn btn-primary" (click)="takeinOrder(product)">Take In</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

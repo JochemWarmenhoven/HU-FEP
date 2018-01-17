@@ -1,9 +1,24 @@
-<ul>
-  <li *ngFor="let product of (products$ | async)">
-    <span>{{product.name}}</span>
-    <button (click)="orderProduct(product)">Order Product</button>
-  </li>
-</ul>
+<div class="container">
 
+  <h2>Reserve Product</h2>
+  <p>Underneath you'll find products that you can reserve. You can view your reserved products under 'My Reservations'.</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Product Name</th>
+        <th scope="col">Order Product</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of (products$ | async)">
+        <td>{{product.name}}</td>
+        <td>
+          <button class="btn btn-success" (click)="orderProduct(product)">Order Product</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <input #productName type="text" (keyup.enter)="addProduct(productName.value)">
