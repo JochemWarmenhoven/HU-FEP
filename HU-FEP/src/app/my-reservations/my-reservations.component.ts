@@ -5,6 +5,7 @@ import {
 } from 'angularfire2/database';
 
 import { AuthService } from '../shared/auth.service';
+import { ToastrService } from 'toastr-ng2';
 
 @Component({
   selector: 'app-my-reservations',
@@ -14,7 +15,11 @@ import { AuthService } from '../shared/auth.service';
 export class MyReservationsComponent implements OnInit {
   products$: FirebaseListObservable<any[]>;
 
-  constructor(private af: AngularFireDatabase, private auth: AuthService) {}
+  constructor(
+    private af: AngularFireDatabase,
+    private auth: AuthService,
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit() {
     this.products$ = this.af.list('/products', {
@@ -32,5 +37,6 @@ export class MyReservationsComponent implements OnInit {
       loaned: false,
       loanedDate: ''
     });
+    this.toastrService.success('Your order has been canceled.', 'Success!');
   }
 }

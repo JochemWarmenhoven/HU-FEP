@@ -6,6 +6,7 @@ import {
 } from 'angularfire2/database';
 
 import { AuthService } from '../shared/auth.service';
+import { ToastrService } from 'toastr-ng2';
 
 @Component({
   selector: 'app-processing-page',
@@ -15,7 +16,11 @@ import { AuthService } from '../shared/auth.service';
 export class ProcessingPageComponent implements OnInit {
   products$: FirebaseListObservable<any[]>;
 
-  constructor(private af: AngularFireDatabase, private auth: AuthService) {}
+  constructor(
+    private af: AngularFireDatabase,
+    private auth: AuthService,
+    private toastrService: ToastrService
+  ) {}
 
   ngOnInit() {
     this.products$ = this.af.list('/products', {
@@ -27,6 +32,7 @@ export class ProcessingPageComponent implements OnInit {
     this.af.object('/products/' + product.$key).update({
       ready: true
     });
+    this.toastrService.success('Order is ready', 'Succes!');
   }
 
   cancelProcess(product: any) {
