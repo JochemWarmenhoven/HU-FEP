@@ -4,22 +4,22 @@
       <a class="navbar-brand" routerLink="/dashboard" routerLinkActive="active">Beheersysteem</a>
     </div>
     <ul class="nav navbar-nav">
-      <li>
+      <li *ngIf="auth.isAuthenticated() && !auth.isAdmin()">
         <a routerLink="/dashboard" routerLinkActive="active">Home</a>
       </li>
-      <li>
+      <li *ngIf="auth.isAuthenticated() && !auth.isAdmin()">
         <a routerLink="/products" routerLinkActive="active">Reserve Product</a>
       </li>
-      <li>
+      <li *ngIf="auth.isAuthenticated() && !auth.isAdmin()">
         <a routerLink="/my-reservations" routerLinkActive="active">My Reservations</a>
       </li>
-      <li>
+      <li *ngIf="auth.isAdmin()">
         <a routerLink="/processing" routerLinkActive="active">Processing</a>
       </li>
-      <li>
+      <li *ngIf="auth.isAdmin()">
         <a routerLink="/intake" routerLinkActive="active">Product Intake</a>
       </li>
-      <li>
+      <li *ngIf="auth.isAuthenticated()">
         <a (click)="logout()">Logout</a>
       </li>
     </ul>
